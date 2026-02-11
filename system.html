@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Changelog | Forge Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@700&family=Inter:wght@300;400;600&family=Fira+Code:wght@400&display=swap');
+        
+        body { background-color: #050505; color: #e5e5e5; font-family: 'Inter', sans-serif; }
+        .font-forge { font-family: 'Outfit', sans-serif; text-transform: uppercase; letter-spacing: 0.15em; }
+        .font-mono { font-family: 'Fira Code', monospace; }
+
+        .log-node {
+            position: relative;
+            padding-left: 3rem;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            margin-left: 1rem;
+        }
+
+        .log-node::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 0;
+            width: 9px;
+            height: 9px;
+            background: #333;
+            border: 2px solid #050505;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .log-node:hover::before {
+            background: #ea580c;
+            box-shadow: 0 0 10px #ea580c;
+        }
+
+        .patch-tag {
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 2px;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body class="pt-20">
+
+    <nav class="fixed top-0 w-full z-50 border-b border-white/5 bg-black/60 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-2 h-8 bg-orange-600"></div>
+                <span class="font-forge text-xl text-white">FORGE / CHANGELOG</span>
+            </div>
+            <div class="text-[10px] font-mono text-orange-500">CURRENT_STABLE: v2.4.0</div>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-6 py-24">
+        
+        <header class="mb-20">
+            <h1 class="font-forge text-4xl md:text-6xl text-white mb-6 text-center">System <span class="text-orange-600">Evolution.</span></h1>
+            <p class="text-gray-500 text-center max-w-xl mx-auto">Tracking the iterative optimization of the Forge Neural Engine and Global Routing Infrastructure.</p>
+        </header>
+
+        <div class="space-y-16">
+
+            <div class="log-node">
+                <div class="flex items-center gap-4 mb-4">
+                    <h2 class="font-forge text-2xl text-white">v2.4.0</h2>
+                    <span class="patch-tag bg-orange-600/20 text-orange-500 border border-orange-500/20">Stable Release</span>
+                    <span class="text-[10px] font-mono text-gray-600">FEB 05, 2026</span>
+                </div>
+                <div class="bg-white/[0.02] border border-white/5 p-6 rounded-sm">
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Core Optimizations</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-500 mt-1"><i class="fas fa-plus-circle text-[10px]"></i></span>
+                            <span>Implemented **Swarm Inference Logic** reducing multi-node latency by 14%.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-orange-500 mt-1"><i class="fas fa-bolt text-[10px]"></i></span>
+                            <span>Enhanced **Thermal Buffer** stability for high-concurrency enterprise streams.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-blue-400 mt-1"><i class="fas fa-wrench text-[10px]"></i></span>
+                            <span>Resolved a memory leak in the Python SDK's asynchronous worker pool.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="log-node">
+                <div class="flex items-center gap-4 mb-4">
+                    <h2 class="font-forge text-2xl text-gray-400">v2.3.8</h2>
+                    <span class="patch-tag bg-gray-600/20 text-gray-500 border border-white/5">Patch Update</span>
+                    <span class="text-[10px] font-mono text-gray-600">JAN 21, 2026</span>
+                </div>
+                <div class="p-6">
+                    <ul class="space-y-3 text-sm text-gray-500">
+                        <li>Fixed authentication handshake timeout in low-bandwidth regions.</li>
+                        <li>Optimized CSS rendering for the **Infrastructure Console**.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="log-node">
+                <div class="flex items-center gap-4 mb-4">
+                    <h2 class="font-forge text-2xl text-gray-400">v2.3.0</h2>
+                    <span class="patch-tag bg-orange-600/20 text-orange-500 border border-orange-500/20">Major Update</span>
+                    <span class="text-[10px] font-mono text-gray-600">DEC 15, 2025</span>
+                </div>
+                <div class="bg-white/[0.01] border border-white/5 p-6 rounded-sm opacity-60">
+                    <p class="text-sm text-gray-400 italic mb-4">Integration of the initial "Forge" routing protocol and global edge distribution nodes.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-32 text-center">
+            <button class="px-8 py-3 border border-orange-600/30 text-orange-500 font-bold text-[10px] uppercase tracking-widest hover:bg-orange-600 hover:text-white transition">
+                Download Raw Log (.JSON)
+            </button>
+        </div>
+
+    </main>
+
+    <footer class="py-12 border-t border-white/5 text-center text-[10px] text-gray-600 tracking-[0.4em] uppercase">
+        Version History Archive // End of Feed
+    </footer>
+
+</body>
+</html>

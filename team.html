@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architects | Forge Intelligence Team</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@700&family=Inter:wght@300;400;600&display=swap');
+        
+        body { background-color: #050505; color: #e5e5e5; font-family: 'Inter', sans-serif; }
+        .font-forge { font-family: 'Outfit', sans-serif; text-transform: uppercase; letter-spacing: 0.15em; }
+
+        .architect-card {
+            background: rgba(15, 15, 15, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .architect-image {
+            filter: grayscale(100%) brightness(80%);
+            transition: all 0.5s ease;
+        }
+
+        .architect-card:hover .architect-image {
+            filter: grayscale(0%) brightness(100%);
+            transform: scale(1.05);
+        }
+
+        .architect-card:hover {
+            border-color: #ea580c;
+            box-shadow: 0 0 30px rgba(234, 88, 12, 0.05);
+        }
+
+        .thermal-line {
+            width: 0;
+            height: 2px;
+            background: #ea580c;
+            transition: width 0.5s ease;
+        }
+
+        .architect-card:hover .thermal-line {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="pt-20">
+
+    <nav class="fixed top-0 w-full z-50 border-b border-white/5 bg-black/60 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-2 h-8 bg-orange-600"></div>
+                <span class="font-forge text-xl text-white">FORGE / ARCHITECTS</span>
+            </div>
+            <a href="index.html" class="text-[10px] font-bold tracking-[0.2em] text-orange-500 hover:text-white transition">SYSTEM_CORE</a>
+        </div>
+    </nav>
+
+    <header class="py-24 px-6 text-center">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="font-forge text-5xl md:text-7xl mb-8 text-white">The <span class="text-orange-600">Architects.</span></h1>
+            <p class="text-gray-400 text-lg leading-relaxed">
+                Meet the engineers and visionaries deconstructing the limits of artificial intelligence. We don't just build models; we forge the infrastructure of the future.
+            </p>
+        </div>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-6 pb-32">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            
+            <div class="architect-card group">
+                <div class="aspect-[4/5] overflow-hidden bg-neutral-900">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800" alt="CTO" class="architect-image w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="thermal-line mb-4"></div>
+                    <h3 class="font-forge text-lg text-white mb-1">Marcus Vane</h3>
+                    <p class="text-[10px] text-orange-600 font-bold uppercase tracking-widest mb-4">Chief Systems Architect</p>
+                    <p class="text-sm text-gray-500 line-clamp-2">Former lead at DataCore, specializing in distributed neural clusters.</p>
+                </div>
+            </div>
+
+            <div class="architect-card group">
+                <div class="aspect-[4/5] overflow-hidden bg-neutral-900">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=800" alt="Lead Engineer" class="architect-image w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="thermal-line mb-4"></div>
+                    <h3 class="font-forge text-lg text-white mb-1">Elena Thorne</h3>
+                    <p class="text-[10px] text-orange-600 font-bold uppercase tracking-widest mb-4">Neural Routing Lead</p>
+                    <p class="text-sm text-gray-500 line-clamp-2">Pioneer in sub-millisecond latency protocols and swarm logic.</p>
+                </div>
+            </div>
+
+            <div class="architect-card group">
+                <div class="aspect-[4/5] overflow-hidden bg-neutral-900">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=800" alt="Product" class="architect-image w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="thermal-line mb-4"></div>
+                    <h3 class="font-forge text-lg text-white mb-1">Cyrus Krell</h3>
+                    <p class="text-[10px] text-orange-600 font-bold uppercase tracking-widest mb-4">Infrastructure Strategy</p>
+                    <p class="text-sm text-gray-500 line-clamp-2">Scaling Forge systems for Fortune 500 automation pipelines.</p>
+                </div>
+            </div>
+
+            <div class="architect-card group">
+                <div class="aspect-[4/5] overflow-hidden bg-neutral-900">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800" alt="Security" class="architect-image w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="thermal-line mb-4"></div>
+                    <h3 class="font-forge text-lg text-white mb-1">Sloane Aris</h3>
+                    <p class="text-[10px] text-orange-600 font-bold uppercase tracking-widest mb-4">Thermal Security Expert</p>
+                    <p class="text-sm text-gray-500 line-clamp-2">Architect of the zero-trust encryption layer within the Forge.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="py-24 border-t border-white/5 bg-white/[0.01]">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="font-forge text-3xl text-white mb-6">System Expansion</h2>
+            <p class="text-gray-400 mb-10">We are always seeking elite talent to join the Forge. If you specialize in ML Ops, Rust, or Distributed Systems, we want to hear from you.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="px-6 py-3 border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:bg-white/5 cursor-pointer transition">Backend Engineer (Rust)</div>
+                <div class="px-6 py-3 border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:bg-white/5 cursor-pointer transition">ML Researcher</div>
+                <div class="px-6 py-3 border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:bg-white/5 cursor-pointer transition">DevOps Architect</div>
+            </div>
+            <button class="mt-12 text-orange-500 font-bold text-xs uppercase tracking-[0.3em] hover:text-white transition">View All Positions →</button>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center">
+        <p class="text-[10px] text-gray-600 tracking-[0.5em] uppercase">Human Resources // Forge Intelligence</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python SDK | Forge Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@700&family=Fira+Code:wght@400;500&display=swap');
+        body { background-color: #050505; color: #e5e5e5; font-family: 'Inter', sans-serif; }
+        .font-forge { font-family: 'Outfit', sans-serif; text-transform: uppercase; letter-spacing: 0.1em; }
+        .font-mono { font-family: 'Fira Code', monospace; }
+        .code-container { background: rgba(10, 10, 10, 0.8); border: 1px solid rgba(255, 255, 255, 0.05); position: relative; }
+        .copy-btn { transition: all 0.2s ease; }
+        .copy-btn.copied { color: #ea580c; border-color: #ea580c; }
+    </style>
+</head>
+<body class="p-8 md:p-16">
+    <div class="max-w-4xl mx-auto">
+        <div class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-gray-500 mb-8">
+            <a href="docs.html" class="hover:text-white">Docs</a> <span>/</span> 
+            <a href="#" class="hover:text-white">Integration</a> <span>/</span> 
+            <span class="text-orange-500">Python SDK</span>
+        </div>
+
+        <h1 class="font-forge text-4xl text-white mb-6">Forge Python SDK</h1>
+        <p class="text-gray-400 text-lg leading-relaxed mb-10">
+            The official Python client for Forge Intelligence. Streamline your neural routing and cluster management with our high-level asynchronous wrapper.
+        </p>
+<section id="latency-standards" class="pt-12 border-t border-white/5 mt-12">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-1 h-6 bg-orange-600 shadow-[0_0_10px_rgba(234,88,12,0.4)]"></div>
+                <h2 class="font-forge text-lg text-white tracking-widest uppercase">Latency_Standards_V2</h2>
+            </div>
+
+            <p class="text-gray-400 text-sm mb-8 leading-relaxed max-w-2xl font-mono">
+                Forge Infrastructure utilizes a decentralized mesh network to ensure sub-50ms execution across primary hubs. 
+                Current standards are measured from <span class="text-orange-500">Node_Origin</span> to <span class="text-orange-500">Edge_Termination</span>.
+            </p>
+
+            <div class="overflow-hidden border border-white/5 bg-black/20 rounded-sm backdrop-blur-sm">
+                <table class="w-full text-left font-mono text-[11px]">
+                    <thead>
+                        <tr class="bg-white/5 text-gray-500 uppercase tracking-tighter border-b border-white/5">
+                            <th class="p-4">Region_Cluster</th>
+                            <th class="p-4 text-center">P95_Response</th>
+                            <th class="p-4 text-center">Throughput_Cap</th>
+                            <th class="p-4 text-right">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-300">
+                        <tr class="hover:bg-white/[0.02] transition-colors border-b border-white/5">
+                            <td class="p-4 text-white font-bold">NORTH_AMERICA_WEST</td>
+                            <td class="p-4 text-center text-orange-500">12ms</td>
+                            <td class="p-4 text-center text-gray-500 italic">50,000 TPS</td>
+                            <td class="p-4 text-right"><span class="text-green-500 underline decoration-green-900/30">NOMINAL</span></td>
+                        </tr>
+                        <tr class="hover:bg-white/[0.02] transition-colors border-b border-white/5">
+                            <td class="p-4 text-white font-bold">EUROPE_CENTRAL_CORE</td>
+                            <td class="p-4 text-center text-orange-500">28ms</td>
+                            <td class="p-4 text-center text-gray-500 italic">42,000 TPS</td>
+                            <td class="p-4 text-right"><span class="text-green-500 underline decoration-green-900/30">NOMINAL</span></td>
+                        </tr>
+                        <tr class="hover:bg-white/[0.02] transition-colors">
+                            <td class="p-4 text-white font-bold">ASIA_PACIFIC_SOUTH</td>
+                            <td class="p-4 text-center text-orange-500">44ms</td>
+                            <td class="p-4 text-center text-gray-500 italic">38,000 TPS</td>
+                            <td class="p-4 text-right"><span class="text-orange-500 animate-pulse">DEGRADED</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="mt-4 p-3 bg-orange-950/10 border border-orange-900/20">
+                <p class="text-[10px] text-orange-600/70 font-mono leading-tight uppercase">
+                    <i class="fas fa-exclamation-triangle mr-1"></i> Warning: Asia_Pacific_South is currently undergoing thermal recycling. Throughput may fluctuate.
+                </p>
+            </div>
+        </section>
+
+        <div class="mt-16 pt-8 border-t border-white/5 flex justify-between">
+            <a href="infrastructure.html" class="text-xs text-gray-500 hover:text-orange-500 transition">← NEURAL ROUTING</a>
+            <a href="dashboard.html" class="text-xs text-orange-500 hover:text-orange-400 transition font-bold uppercase">LIVE DASHBOARD →</a>
+        </div>
+
+        
+    <script>
+    // Variable to store the state of the key for export
+    let currentGeneratedKey = "";
+    // Modal Control State
+    let modalOpen = false;
+
+    // Handles the "Copy" buttons for code terminal blocks
+    function copyCode(button) {
+        const pre = button.nextElementSibling;
+        const text = pre.innerText;
+        
+        navigator.clipboard.writeText(text).then(() => {
+            const originalText = button.innerText;
+            button.innerText = "Copied!";
+            button.classList.add('copied');
+            
+            setTimeout(() => {
+                button.innerText = originalText;
+                button.classList.remove('copied');
+            }, 2000);
+        });
+    }
+
+    /**
+     * Generates a randomized secure key with a 'crunching' visual effect
+     */
+    function generateKey() {
+        const keyDisplay = document.getElementById('key-display');
+        const downloadBtn = document.getElementById('download-env');
+        const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        let iterations = 0;
+
+        // Reset button state if generating a new one
+        downloadBtn.classList.add('hidden');
+        downloadBtn.classList.remove('opacity-100');
+        downloadBtn.classList.add('opacity-0');
+
+        // Visual 'Scrambling' effect
+        const interval = setInterval(() => {
+            keyDisplay.innerText = Array(19).fill(0).map(() => charset[Math.floor(Math.random() * charset.length)]).join('');
+            keyDisplay.classList.add('text-orange-500');
+            iterations++;
+
+            if (iterations > 12) {
+                clearInterval(interval);
+                
+                const segments = Array.from({length: 4}, () => 
+                    Array.from({length: 4}, () => charset[Math.floor(Math.random() * charset.length)]).join('')
+                );
+                
+                currentGeneratedKey = `FRGE-${segments.join('-')}`;
+                
+                keyDisplay.innerText = currentGeneratedKey;
+                keyDisplay.classList.remove('text-orange-500', 'text-gray-600');
+                keyDisplay.classList.add('text-green-500');
+                
+                downloadBtn.classList.remove('hidden');
+                setTimeout(() => {
+                    downloadBtn.classList.add('opacity-100');
+                    keyDisplay.classList.replace('text-green-500', 'text-white');
+                }, 100);
+            }
+        }, 60);
+    }
+
+    /**
+     * Creates download for the .env file and triggers security scan
+     */
+    function exportEnv() {
+        if (!currentGeneratedKey) return;
+
+        const envContent = `# Forge Intelligence - Production Environment\n` +
+                           `# Generated: ${new Date().toISOString()}\n\n` +
+                           `FORGE_SIGMA_KEY=${currentGeneratedKey}\n` +
+                           `FORGE_API_ENDPOINT=https://api.forge-intel.io/v1\n` +
+                           `FORGE_THERMAL_LIMIT=0.85\n` +
+                           `FORGE_DEBUG=false\n` +
+                           `FORGE_ENV=production`;
+
+        const blob = new Blob([envContent], { type: 'text/plain' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = '.env';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+
+        triggerSecurityScan();
+    }
+
+    /**
+     * Animates the security verification toast and integrity scan
+     */
+    function triggerSecurityScan() {
+        const toast = document.getElementById('security-toast');
+        const bar = document.getElementById('scan-bar');
+        const percent = document.getElementById('scan-percent');
+        const hashText = document.getElementById('hash-val');
+        const verifyBtn = document.getElementById('verify-sig-btn'); 
+        
+        // Show Toast and hide verify button for fresh scan
+        toast.classList.remove('translate-x-[120%]');
+        verifyBtn.classList.add('hidden'); 
+        
+        const mockHash = Array.from({length: 32}, () => Math.floor(Math.random() * 16).toString(16)).join('').toUpperCase();
+        
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.floor(Math.random() * 15) + 5;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+                hashText.innerText = mockHash;
+                hashText.classList.replace('text-gray-400', 'text-green-500');
+                verifyBtn.classList.remove('hidden'); 
+                
+                // Auto-hide toast after 5 seconds if modal isn't open
+                setTimeout(() => {
+                    if (!modalOpen) toast.classList.add('translate-x-[120%]');
+                }, 5000);
+            }
+            bar.style.width = progress + '%';
+            percent.innerText = progress + '%';
+        }, 150);
+    }
+
+    // Modal Visibility Controls
+    function showReport() {
+        modalOpen = true;
+        document.getElementById('report-modal').classList.remove('hidden');
+    }
+
+    function closeReport() {
+        modalOpen = false;
+        document.getElementById('report-modal').classList.add('hidden');
+        // Ensure toast hides when report is dismissed
+        document.getElementById('security-toast').classList.add('translate-x-[120%]');
+    }
+</script>
+</body>
+</html>

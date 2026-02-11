@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forge Intelligence | System Authentication</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@700&family=Inter:wght@300;400;600&family=JetBrains+Mono&display=swap');
+        
+        body { background-color: #050505; color: #e5e5e5; font-family: 'Inter', sans-serif; }
+        .font-forge { font-family: 'Outfit', sans-serif; text-transform: uppercase; letter-spacing: 0.1em; }
+        
+        /* Biometric Scan Line Animation */
+        .scan-line {
+            width: 100%;
+            height: 2px;
+            background: #ea580c;
+            box-shadow: 0 0 15px #ea580c;
+            position: absolute;
+            top: 0;
+            animation: scanning 3s ease-in-out infinite;
+        }
+
+        @keyframes scanning {
+            0%, 100% { top: 0%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        .glass-panel {
+            background: rgba(15, 15, 15, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 77, 0, 0.1);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #ea580c !important;
+            background: rgba(234, 88, 12, 0.05) !important;
+        }
+    </style>
+</head>
+<body class="h-screen flex items-center justify-center overflow-hidden">
+    
+
+    <div class="fixed inset-0 bg-[linear-gradient(rgba(255,77,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,77,0,0.02)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+
+    <div class="relative z-10 w-full max-w-md px-6">
+        
+        <div class="relative w-24 h-24 mx-auto mb-10 border border-orange-600/30 rounded-full flex items-center justify-center overflow-hidden">
+            <div class="scan-line"></div>
+            <i class="fas fa-fingerprint text-4xl text-orange-600/50"></i>
+        </div>
+
+        <div class="glass-panel p-8 rounded-sm shadow-2xl">
+            <div class="text-center mb-8">
+                <h1 class="font-forge text-2xl text-white mb-2">Initialize Link</h1>
+                <p class="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Security Clearance Required // Level 01</p>
+            </div>
+
+            <form action="#" class="space-y-6">
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Architect ID</label>
+                    <input type="text" placeholder="USER_NAME" class="w-full bg-black/40 border border-white/5 py-3 px-4 font-mono text-sm text-orange-500 transition-all">
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Access Key</label>
+                    <input type="password" placeholder="••••••••" class="w-full bg-black/40 border border-white/5 py-3 px-4 font-mono text-sm text-orange-500 transition-all">
+                </div>
+
+                <div class="pt-4">
+                    <button class="w-full py-4 bg-orange-600 text-white font-bold text-xs uppercase tracking-[0.3em] hover:bg-orange-500 transition-all shadow-[0_0_20px_rgba(234,88,12,0.2)]">
+                        Verify Identity
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-8 pt-6 border-t border-white/5 flex justify-between text-[10px] font-bold uppercase tracking-widest text-gray-600">
+                <a href="#" class="hover:text-white transition">Lost Key?</a>
+                <a href="index.html" class="hover:text-white transition">Return to Core</a>
+            </div>
+        </div>
+
+        <div class="mt-6 font-mono text-[9px] text-gray-600 text-center uppercase tracking-tighter">
+            <p id="status-log">[STATUS] WAITING_FOR_INPUT...</p>
+        </div>
+    </div>
+
+    <script>
+        // Rotating system logs
+        const logs = [
+            "[STATUS] WAITING_FOR_INPUT...",
+            "[SYSTEM] ENCRYPTING_HANDSHAKE...",
+            "[WARN] UNAUTHORIZED_ACCESS_LOGGED",
+            "[STATUS] BIOMETRIC_HUD_ACTIVE"
+        ];
+        let currentLog = 0;
+        setInterval(() => {
+            currentLog = (currentLog + 1) % logs.length;
+            document.getElementById('status-log').innerText = logs[currentLog];
+        }, 4000);
+    </script>
+</body>
+</html>

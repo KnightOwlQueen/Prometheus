@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forge // Infrastructure Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@700&family=Inter:wght@300;400;600&family=JetBrains+Mono&display=swap');
+        
+        body { background-color: #050505; color: #e5e5e5; font-family: 'Inter', sans-serif; }
+        .font-forge { font-family: 'Outfit', sans-serif; text-transform: uppercase; letter-spacing: 0.15em; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        .glass-card {
+            background: rgba(15, 15, 15, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Activity Flicker Animation */
+        @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        .flicker { animation: flicker 0.1s infinite; }
+
+        /* Grid Background */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+        }
+
+        /* Hide scrollbar for the console output */
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        #console-output { scrollbar-width: none; }
+    </style>
+</head>
+<body class="min-h-screen bg-grid flex flex-col">
+
+    <nav class="p-6 border-b border-white/5 flex justify-between items-center bg-black/80 sticky top-0 z-50">
+        <div class="flex items-center gap-6">
+            <div class="flex items-center gap-2">
+                <div class="w-1.5 h-5 bg-orange-600"></div>
+                <h1 class="text-white font-forge text-xs tracking-[0.3em]">Infrastructure Dashboard</h1>
+            </div>
+            <div class="hidden md:flex gap-4 font-mono text-[10px] text-gray-500">
+                <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-green-500 flicker"></span> NODE: ACTIVE</span>
+                <span>LATENCY: 12ms</span>
+            </div>
+        </div>
+        <div class="text-right">
+            <p class="font-mono text-[9px] text-gray-600 uppercase">Neural Operator: <span class="text-white" id="session-user">J. DOE</span></p>
+        </div>
+    </nav>
+
+    <main class="p-6 md:p-10 grid grid-cols-1 lg:grid-cols-4 gap-6">
+        
+        <div class="lg:col-span-1 space-y-6">
+            <div class="glass-card p-6 border-t-2 border-orange-600">
+                <h3 class="font-forge text-[10px] text-gray-400 mb-6 tracking-widest">Neural Load Metrics</h3>
+                
+                <div class="mb-6">
+                    <div class="flex justify-between font-mono text-[9px] mb-2 uppercase text-gray-500">
+                        <span>Cluster CPU Expansion</span>
+                        <span id="cpu-val" class="text-white">42%</span>
+                    </div>
+                    <div class="w-full h-1 bg-white/5">
+                        <div id="cpu-bar" class="h-full bg-white transition-all duration-500" style="width: 42%;"></div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <div class="flex justify-between font-mono text-[9px] mb-2 uppercase text-gray-500">
+                        <span>Synaptic Memory</span>
+                        <span id="mem-val" class="text-white">68%</span>
+                    </div>
+                    <div class="w-full h-1 bg-white/5">
+                        <div id="mem-bar" class="h-full bg-orange-600 transition-all duration-700" style="width: 68%;"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between font-mono text-[9px] mb-2 uppercase text-gray-500">
+                        <span>Inference Throughput</span>
+                        <span id="inf-val" class="text-white">12%</span>
+                    </div>
+                    <div class="w-full h-1 bg-white/5">
+                        <div id="inf-bar" class="h-full bg-gray-500 transition-all duration-300" style="width: 12%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card p-6">
+                <h3 class="font-forge text-[10px] text-gray-400 mb-4 tracking-widest">System Health</h3>
+                <div class="flex items-center gap-4 border-l border-green-500/30 pl-4 py-2">
+                    <div class="text-green-500 font-mono text-xl tracking-tighter">100%</div>
+                    <div class="text-[8px] font-mono text-gray-600 leading-tight">HARDWARE STABILITY<br>PROTOCOL: VERIFIED</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:col-span-2 space-y-6">
+            <div class="glass-card h-[400px] relative overflow-hidden bg-black/40">
+                <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80')] bg-cover bg-center grayscale"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent"></div>
+                
+                <div class="relative z-10 p-8">
+                    <h3 class="font-forge text-[10px] text-white tracking-widest mb-2">Primary Node Deployment</h3>
+                    <p class="font-mono text-[8px] text-orange-500 uppercase">Sector: US-EAST-01 // Grid: 40.7128° N, 74.0060° W</p>
+                    
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                        <div class="w-4 h-4 bg-orange-600 rounded-full animate-ping opacity-75"></div>
+                        <div class="w-2 h-2 bg-white rounded-full absolute top-1 left-1"></div>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-6 left-6 right-6 flex justify-between items-end relative z-10">
+                    <div class="font-mono text-[8px] text-gray-500 space-y-1">
+                        <p>> PINGING NEW YORK CLUSTER...</p>
+                        <p>> RESPONSE: 4ms</p>
+                    </div>
+                    <div class="p-2 border border-white/5 bg-black/60 font-mono text-[8px] text-white">
+                        Uptime: 00:14:22:04
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 h-[300px] flex flex-col border-l-2 border-orange-600/50">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-forge text-[10px] text-gray-400 tracking-widest uppercase">Neural Command Terminal</h3>
+                    <span class="text-[8px] font-mono text-orange-500 animate-pulse">TERMINAL_READY</span>
+                </div>
+                
+                <div id="console-output" class="font-mono text-[10px] text-orange-500/80 space-y-1 overflow-y-auto flex-grow mb-4 scrollbar-hide">
+                    <p class="text-gray-500">Forge OS [Version 4.0.2]</p>
+                    <p class="text-gray-500">Type 'HELP' for available neural commands.</p>
+                </div>
+
+                <div class="flex items-center gap-2 border-t border-white/5 pt-4">
+                    <span class="text-orange-500 font-mono text-xs">></span>
+                    <input type="text" id="terminal-input" 
+                           class="bg-transparent border-none outline-none text-white font-mono text-xs w-full uppercase" 
+                           placeholder="Enter Command..." autofocus>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:col-span-1 space-y-6">
+            <div class="glass-card p-6">
+                <h3 class="font-forge text-[10px] text-gray-400 mb-6 tracking-widest">Active Services</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-3 border border-white/5 bg-white/[0.02]">
+                        <span class="font-mono text-[9px] uppercase">API Gateway</span>
+                        <span class="px-2 py-0.5 bg-green-900/30 text-green-500 font-mono text-[8px]">LIVE</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 border border-white/5 bg-white/[0.02]">
+                        <span class="font-mono text-[9px] uppercase">Firewall</span>
+                        <span class="px-2 py-0.5 bg-green-900/30 text-green-500 font-mono text-[8px]">ACTIVE</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 border border-white/5 bg-white/[0.02]">
+                        <span class="font-mono text-[9px] uppercase">Auto-Scaling</span>
+                        <span class="px-2 py-0.5 bg-white/5 text-gray-500 font-mono text-[8px]">IDLE</span>
+                    </div>
+                </div>
+            </div>
+
+          <a href="docs.html" class="block w-full py-4 bg-white text-black font-forge text-[10px] hover:bg-orange-600 hover:text-white transition-all text-center">
+    Access Documentation
+</a>
+
+
+        </div>
+
+    </main>
+
+    <script>
+        // 1. Metric Fluctuations
+        function updateMetric(id, barId, base) {
+            const val = Math.min(100, Math.max(0, base + (Math.random() * 20 - 10)));
+            document.getElementById(id).innerText = `${Math.floor(val)}%`;
+            document.getElementById(barId).style.width = `${val}%`;
+            return val;
+        }
+
+        let cpu = 42, mem = 68, inf = 12;
+        setInterval(() => {
+            cpu = updateMetric('cpu-val', 'cpu-bar', cpu);
+            mem = updateMetric('mem-val', 'mem-bar', mem);
+            inf = updateMetric('inf-val', 'inf-bar', inf);
+        }, 3000);
+
+        // 2. Terminal Logic
+        const terminalInput = document.getElementById('terminal-input');
+        const consoleOutput = document.getElementById('console-output');
+
+        const commands = {
+            'HELP': "AVAILABLE: STATUS, DEPLOY, FLUSH, SYSTEM, CLEAR, LOGOUT",
+            'STATUS': "NODE_01: ONLINE | LATENCY: 12ms | UPTIME: 100% | ENCRYPTION: ACTIVE",
+            'DEPLOY': "INITIALIZING SECONDARY INSTANCE... ERROR: INSUFFICIENT PERMISSIONS.",
+            'FLUSH': "NEURAL CACHE PURGED SUCCESSFULLY.",
+            'SYSTEM': "FORGE CORE v4.0. INITIALIZED BY NEURAL_OP_ALPHA.",
+        };
+
+        terminalInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const input = this.value.trim().toUpperCase();
+                this.value = '';
+
+                const userLine = document.createElement('p');
+                userLine.innerHTML = `<span class="text-white">> ${input}</span>`;
+                consoleOutput.appendChild(userLine);
+
+                setTimeout(() => {
+                    if (input === 'CLEAR') {
+                        consoleOutput.innerHTML = '';
+                        return;
+                    }
+
+                    const responseLine = document.createElement('p');
+                    if (commands[input]) {
+                        responseLine.innerText = `RE: ${commands[input]}`;
+                        responseLine.classList.add('text-orange-500');
+                    } else {
+                        responseLine.innerText = `CRITICAL: COMMAND '${input}' NOT RECOGNIZED.`;
+                        responseLine.classList.add('text-red-500');
+                    }
+                    consoleOutput.appendChild(responseLine);
+                    consoleOutput.scrollTop = consoleOutput.scrollHeight;
+                }, 300);
+            }
+        });
+
+        // 3. Session Persistence
+        document.getElementById('session-user').innerText = "OP_" + Math.random().toString(36).substr(2, 4).toUpperCase();
+    </script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forge Webhooks // System Events</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@700&family=Inter:wght@300;400;600&family=JetBrains+Mono&display=swap');
+        
+        body {
+            background-color: #050505;
+            color: #e5e5e5;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .font-forge { font-family: 'Outfit', sans-serif; text-transform: uppercase; letter-spacing: 0.15em; }
+
+        /* Industrial Noise Overlay */
+        .noise-overlay {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 15;
+            mix-blend-mode: overlay;
+            overflow: hidden;
+        }
+
+        .noise-overlay::before {
+            content: "";
+            position: absolute;
+            inset: -20%;
+            width: 140%;
+            height: 140%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            animation: staticNoise 0.2s infinite;
+        }
+
+        @keyframes staticNoise {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-1%, -1%); }
+            30% { transform: translate(1%, 1%); }
+            50% { transform: translate(-1%, 2%); }
+            70% { transform: translate(2%, -1%); }
+            90% { transform: translate(-2%, 1%); }
+        }
+
+        .glass-card {
+            background: rgba(15, 15, 15, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 77, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .status-pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 10px #22c55e;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+    </style>
+</head>
+<body class="bg-black">
+
+    <aside class="w-64 border-r border-white/5 p-8 flex-shrink-0 hidden lg:block sticky top-0 h-screen bg-black">
+        <div class="flex items-center gap-2 mb-12">
+            <div class="w-2 h-6 bg-orange-600"></div>
+            <h1 class="text-white font-forge text-sm tracking-[0.3em]">Forge / Infrast</h1>
+        </div>
+
+        <nav class="space-y-12">
+            <div>
+                <h4 class="text-gray-600 mb-6 tracking-widest text-[9px] uppercase font-bold">Core Architecture</h4>
+                <ul class="space-y-4 font-mono text-sm">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition">System Overview</a></li>
+                    <li><a href="infrastructure.html" class="text-gray-400 hover:text-white transition">Neural Routing</a></li>
+                    <li><a href="#latency" class="text-gray-400 hover:text-white transition">Latency Standards</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-gray-600 mb-6 tracking-widest text-[9px] uppercase font-bold">Integration</h4>
+                <ul class="space-y-4 font-mono text-sm text-gray-400">
+                    <li><a href="forge-api.html" class="hover:text-orange-500 transition block">Forge API</a></li>
+                    <li class="text-orange-600 flex items-center gap-2">
+                        <span class="w-1 h-4 bg-orange-600"></span>
+                        <a href="webhooks.html" class="font-bold">Webhooks</a>
+                    </li>
+                    <li><a href="python-sdk.html" class="hover:text-orange-500 transition block">Python SDK</a></li>
+                </ul>
+            </div>
+        </nav>
+    </aside>
+
+    <main class="flex-1 p-12 max-w-5xl overflow-y-auto">
+        <header class="mb-12 flex justify-between items-start">
+            <div>
+                <span class="text-orange-600 font-mono text-xs uppercase tracking-tighter">Events // Real-time</span>
+                <h1 class="font-forge text-5xl text-white mt-4">Webhooks</h1>
+                <p class="text-gray-500 mt-4 leading-relaxed max-w-2xl">
+                    Subscribe to automated neural events. Forge pushes HTTP POST payloads to your endpoint whenever stability shifts or inferences complete.
+                </p>
+            </div>
+            <div class="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                <div class="status-pulse"></div>
+                <span class="text-[10px] font-mono text-gray-400 uppercase tracking-widest">Gateway Active</span>
+            </div>
+        </header>
+
+        
+
+        <section class="space-y-12">
+            <div class="glass-card p-6 border-l-4 border-orange-600">
+                <h3 class="text-white font-mono text-sm mb-4">Example Event Payload</h3>
+                <div class="bg-black/80 p-5 rounded border border-white/5 relative overflow-hidden">
+                    <div class="noise-overlay opacity-10"></div>
+                    <pre class="font-mono text-sm text-orange-200"><code>{
+  "event_id": "EVT_7721X",
+  "type": "neural.sync_complete",
+  "timestamp": "2026-02-09T00:00:00Z",
+  "data": {
+    "node_id": "NODE_ALPHA_9",
+    "stability_score": 0.992
+  }
+}</code></pre>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="font-forge text-xl text-white mb-8">Event Subscription Catalog</h2>
+                <div class="grid gap-4">
+                    <div class="glass-card p-5 flex justify-between items-center group hover:bg-white/5 cursor-default">
+                        <div>
+                            <code class="text-orange-500 text-sm">neural.handshake_initiated</code>
+                            <p class="text-gray-500 text-xs mt-1">Fires when a new client attempts to establish a link.</p>
+                        </div>
+                        <span class="text-[10px] font-mono text-gray-600 group-hover:text-gray-400 transition">IMMEDIATE</span>
+                    </div>
+                    
+                    <div class="glass-card p-5 flex justify-between items-center group hover:bg-white/5 cursor-default">
+                        <div>
+                            <code class="text-orange-500 text-sm">neural.sync_complete</code>
+                            <p class="text-gray-500 text-xs mt-1">Fires when the distributed cluster achieves parity.</p>
+                        </div>
+                        <span class="text-[10px] font-mono text-gray-600 group-hover:text-gray-400 transition">ASYNCHRONOUS</span>
+                    </div>
+
+                    <div class="glass-card p-5 flex justify-between items-center group hover:bg-white/5 cursor-default">
+                        <div>
+                            <code class="text-orange-500 text-sm">system.thermal_warning</code>
+                            <p class="text-gray-500 text-xs mt-1">Triggered if node temperatures exceed operational thresholds.</p>
+                        </div>
+                        <span class="text-[10px] font-mono text-red-500/50 group-hover:text-red-500 transition">CRITICAL</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

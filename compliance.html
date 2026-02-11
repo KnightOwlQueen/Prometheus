@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance Protocols | Forge Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@700&family=Inter:wght@300;400;600&display=swap');
+        
+        body { background-color: #050505; color: #e5e5e5; font-family: 'Inter', sans-serif; line-height: 1.7; }
+        .font-forge { font-family: 'Outfit', sans-serif; text-transform: uppercase; letter-spacing: 0.15em; }
+
+        .legal-section {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .compliance-sidebar {
+            position: sticky;
+            top: 120px;
+        }
+
+        .protocol-number {
+            font-family: 'Outfit', sans-serif;
+            color: #ea580c;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+        
+        /* Nav hover effect */
+        .nav-link { transition: color 0.3s ease; }
+        .nav-link:hover { color: #ea580c; }
+    </style>
+</head>
+<body class="pt-24">
+
+   <nav class="fixed top-0 w-full z-50 border-b border-white/5 bg-black/90 backdrop-blur-md">
+        <div class="max-w-[1600px] mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="w-1.5 h-6 bg-orange-600 group-hover:shadow-[0_0_15px_rgba(234,88,12,0.8)] transition-all"></div>
+                    <span class="font-forge text-sm text-white tracking-[0.3em]">FORGE</span>
+                </a>
+            </div>
+            
+            <div class="hidden xl:flex gap-8 text-[10px] uppercase font-bold tracking-widest text-gray-500">
+                <a href="index.html" class="nav-link hover:text-orange-500">Core</a>
+                <a href="infrastructure.html" class="nav-link hover:text-orange-500">Infrastructure</a>
+                <a href="pricing.html" class="nav-link hover:text-orange-500">Pricing</a>
+                <a href="blog.html" class="nav-link hover:text-orange-500">Transmissions</a>
+                <a href="team.html" class="nav-link hover:text-orange-500">Architects</a>
+                <a href="system.html" class="nav-link hover:text-orange-500">Changelog</a>
+                <a href="compliance.html" class="nav-link text-orange-500">Compliance</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <span class="hidden md:block text-[10px] text-gray-600 uppercase font-bold tracking-widest">v2.4.0-Stable</span>
+                <button class="bg-white text-black px-4 py-2 text-[10px] font-bold uppercase tracking-tighter hover:bg-orange-600 hover:text-white transition-all">
+                    Terminal
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-[1fr_250px] gap-20">
+        <article>
+            <header class="mb-16">
+                <h1 class="font-forge text-4xl md:text-6xl text-white mb-6 leading-tight">System <br><span class="text-orange-600">Governance.</span></h1>
+                <p class="text-gray-400 text-lg max-w-2xl">The legal and ethical framework governing the extraction and utilization of intelligence through the Forge infrastructure.</p>
+            </header>
+
+            <section id="usage" class="legal-section">
+                <span class="protocol-number">PROTOCOL 01</span>
+                <h2 class="font-forge text-2xl text-white mt-2 mb-6">Authorized Extraction</h2>
+                <div class="text-gray-400 space-y-4">
+                    <p>Users are granted a non-exclusive, non-transferable license to utilize the Forge API for the purpose of generating machine learning inferences and data processing.</p>
+                    <p>Unauthorized use of Forge resources for high-thermal load cyber-warfare or predatory legacy-system deconstruction is strictly prohibited.</p>
+                </div>
+            </section>
+
+            <section id="privacy" class="legal-section">
+                <span class="protocol-number">PROTOCOL 02</span>
+                <h2 class="font-forge text-2xl text-white mt-2 mb-6">Data Thermal Security</h2>
+                <div class="text-gray-400 space-y-4">
+                    <p>We utilize <span class="text-orange-500 font-bold">Zero-Trust Thermal Encryption</span>. Your data is your property. The Forge acts only as the catalyst, processing information without storing raw inputs within the permanent core.</p>
+                    <ul class="list-none space-y-3 pt-4">
+                        <li class="flex items-center gap-3 text-sm"><i class="fas fa-microchip text-orange-600"></i> End-to-end encryption at all routing nodes.</li>
+                        <li class="flex items-center gap-3 text-sm"><i class="fas fa-recycle text-orange-600"></i> Automated data purging post-inference.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="liability" class="legal-section border-none">
+                <span class="protocol-number">PROTOCOL 03</span>
+                <h2 class="font-forge text-2xl text-white mt-2 mb-6">System Liability</h2>
+                <div class="text-gray-400">
+                    <p>While the Forge is designed for maximum resilience, the user acknowledges that high-velocity data extraction involves inherent hardware risks.</p>
+                </div>
+            </section>
+        </article>
+
+        <aside class="hidden lg:block">
+            <div class="compliance-sidebar">
+                <h5 class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-6 border-b border-white/5 pb-2">On This Page</h5>
+                <nav class="space-y-4">
+                    <a href="#usage" class="block text-[11px] font-bold text-gray-400 hover:text-orange-500 transition">01. Authorized Use</a>
+                    <a href="#privacy" class="block text-[11px] font-bold text-gray-400 hover:text-orange-500 transition">02. Data Security</a>
+                    <a href="#liability" class="block text-[11px] font-bold text-gray-400 hover:text-orange-500 transition">03. Liability Limits</a>
+                </nav>
+
+                <div class="mt-12 p-6 bg-orange-600/5 border border-orange-600/20 rounded-sm group cursor-pointer hover:bg-orange-600/10 transition">
+                    <p class="text-[9px] text-orange-500 mb-2 uppercase font-bold tracking-[0.2em]">Legal Export</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-white font-bold">System_Specs.PDF</span>
+                        <i class="fas fa-download text-orange-600 group-hover:translate-y-1 transition-transform"></i>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <footer class="py-12 border-t border-white/5 bg-black/40">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p class="text-[10px] text-gray-600 tracking-[0.5em] uppercase text-center md:text-left">
+                Compliance Directive // Forge Intelligence 2026
+            </p>
+            <div class="flex gap-8 text-[9px] uppercase font-bold tracking-widest text-gray-500">
+                <a href="compliance.html" class="hover:text-white transition">Privacy</a>
+                <a href="compliance.html" class="hover:text-white transition">Terms</a>
+                <a href="system.html" class="hover:text-white transition">Status</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
